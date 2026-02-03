@@ -1,0 +1,14 @@
+{% set determinant_value = module.rand.number.integer(0, 100) %}
+{% set determinant_key = determinant_value | string %}
+
+{% set dependent_value = locals.get(determinant_key) %}
+
+{% if not dependent_value %}
+  {% set dependent_value = module.rand.crypto.uuid4() %}
+  {% do locals.set(determinant_key, dependent_value) %}
+{% endif %}
+
+{
+  "determinant_value": {{ determinant_value }},
+  "dependent_value": {{ dependent_value }}
+}
