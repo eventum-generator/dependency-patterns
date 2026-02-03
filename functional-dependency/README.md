@@ -20,10 +20,18 @@ This is the most basic and strongest form of dependency and serves as a baseline
 ## Validation query
 
 ```sql
+CREATE TABLE functional_dependency
+(
+    determinant_value UInt32,
+    dependent_value String,
+)
+ENGINE = MergeTree()
+ORDER BY determinant_value;
+
 SELECT
     determinant_value,
     countDistinct(dependent_value) AS distinct_dependent_values
-FROM events
+FROM functional_dependency
 GROUP BY determinant_value
 HAVING distinct_dependent_values > 1
 ```
