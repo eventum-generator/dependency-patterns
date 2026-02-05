@@ -1,1 +1,15 @@
-[]
+- id: functional-dependency
+  timezone: UTC
+  batch:
+    size: 10000
+  queue:
+    max_timestamp_batches: 10
+    max_event_batches: 10
+  keep_order: false
+  max_concurrency: 100
+  write_timeout: 10
+  path: /app/config/generators/functional-dependency/generator.yml
+  live_mode: false
+  skip_past: true
+  params: {}
+  autostart: false

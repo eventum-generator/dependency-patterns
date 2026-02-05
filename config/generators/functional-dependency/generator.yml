@@ -11,7 +11,7 @@ event:
         template: templates/template.jinja
 output:
 - clickhouse:
-    host: 127.0.0.1
+    host: clickhouse
     port: 8123
     table: functional_dependency
     password: default
