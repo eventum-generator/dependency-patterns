@@ -1,6 +1,17 @@
 version: "3.8"
 
 services:
+  eventum:
+    image: eventum:latest
+    container_name: eventum
+    depends_on:
+      - clickhouse
+    ports:
+      - "9474:9474"
+    volumes:
+      - ./config:/app/config/:rw  # rw is for keyring updates
+      - ./logs:/app/logs/:rw
+
   clickhouse:
     image: clickhouse/clickhouse-server
     container_name: clickhouse
