@@ -13,3 +13,13 @@ The repository is intended for:
 - **Testing synthetic data generators** to ensure generated datasets satisfy structural and statistical invariants
 - **Learning and demonstration**, showing how different types of dependencies can be encoded and validated  
 - **Research and experimentation** with synthetic datasets and correlation patterns  
+
+## Usage
+
+Run Eventum and ClickHouse services with `docker-compose`:
+
+```sh
+docker-compose up -d
+```
+
+Go to <http://localhost:9474> in you browser.
