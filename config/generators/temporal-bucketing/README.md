@@ -1,4 +1,4 @@
-# Functional dependency
+# Temporal bucketing
 
 ## Definition
 
