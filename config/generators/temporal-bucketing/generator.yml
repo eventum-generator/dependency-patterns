@@ -1,0 +1,17 @@
+input:
+- linspace:
+    start: 00:00:00
+    end: +7d
+    count: 1000000
+event:
+  template:
+    mode: all
+    templates:
+    - template:
+        template: templates/template.jinja
+output:
+- clickhouse:
+    host: clickhouse
+    port: 8123
+    table: temporal_bucketing
+    password: default

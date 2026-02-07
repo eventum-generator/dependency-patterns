@@ -1,0 +1,14 @@
+{% if timestamp.hour < 5 %}
+  {% set dependent_value = "night" %}
+{% elif timestamp.hour < 12 %}
+  {% set dependent_value = "morning" %}
+{% elif timestamp.hour < 16 %}
+  {% set dependent_value = "day" %}
+{% else %}
+  {% set dependent_value = "evening" %}
+{% endif %}
+  
+{
+  "timestamp": "{{ timestamp.isoformat() }}",
+  "dependent_value": "{{ dependent_value }}"
+}
