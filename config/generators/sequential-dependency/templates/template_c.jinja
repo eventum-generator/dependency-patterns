@@ -1,0 +1,7 @@
+{% set session_id = shared.get('session_id') %}
+
+{
+  "timestamp": "{{ timestamp.isoformat() }}",
+  "type": "end",
+  "session_id": "{{ session_id }}"
+}

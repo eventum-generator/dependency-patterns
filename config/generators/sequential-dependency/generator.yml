@@ -1,0 +1,22 @@
+input:
+- timer:
+    seconds: 1.0
+    count: 1
+    repeat: 999999
+event:
+  template:
+    mode: spin
+    templates:
+    - template_a:
+        template: templates/template_a.jinja
+    - template_b:
+        template: templates/template_b.jinja
+    - template_c:
+        template: templates/template_c.jinja
+output:
+- clickhouse:
+    host: clickhouse
+    port: 8123
+    table: sequential_dependency
+    password: default
+

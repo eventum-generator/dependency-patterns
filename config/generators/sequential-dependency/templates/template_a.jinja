@@ -1,0 +1,9 @@
+{% set session_id = module.rand.crypto.uuid4() %}
+
+{
+  "timestamp": "{{ timestamp.isoformat() }}",
+  "type": "start",
+  "session_id": "{{ session_id }}"
+}
+
+{% do shared.set('session_id', session_id) %}
