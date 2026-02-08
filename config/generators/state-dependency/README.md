@@ -62,4 +62,37 @@ FROM (
 )
 WHERE validation_result != 'OK'
 ORDER BY timestamp ASC
+
+WITH 
+    step_1_sessions AS (
+        SELECT 
+            timestamp,
+            stage,
+            progress,
+            sum(progress = 0 AND stage = 'in progress') OVER (ORDER BY timestamp ASC) AS session_id
+        FROM state_dependency
+    ),
+    step_2_metrics AS (
+        SELECT
+            session_id,
+            retention(
+                stage = 'in progress',
+                stage = 'done',
+                stage = 'failure'
+            ) AS r
+        FROM step_1_sessions
+        GROUP BY session_id
+    )
+SELECT
+    count() AS total_sessions,
+    sum(r[1]) AS started,
+    sum(r[2]) AS finished_successfully,
+    sum(r[3]) AS finished_with_failure,
+    round(finished_with_failure / started, 4) AS actual_failure_rate,
+    0.2 AS target_failure_rate,
+    CASE 
+        WHEN abs(actual_failure_rate - target_failure_rate) < 0.1 THEN 'PASS'
+        ELSE 'FAIL (significant deviation)'
+    END AS statistical_status
+FROM step_2_metrics;
 ```
