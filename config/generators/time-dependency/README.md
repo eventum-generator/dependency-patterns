@@ -1,8 +1,8 @@
-# Temporal bucketing
+# Time dependency
 
 ## Definition
 
-Temporal bucketing is a deterministic dependency where a categorical attribute is derived directly from the event timestamp by mapping continuous time into discrete intervals (buckets).
+Time dependency is a deterministic dependency where a categorical attribute is derived directly from the event timestamp by mapping continuous time into discrete intervals (buckets).
 
 Formally, for any record with timestamp t, the value B is defined as B = f(t), where f is a fixed, deterministic time-based function.
 
@@ -10,7 +10,7 @@ Formally, for any record with timestamp t, the value B is defined as B = f(t), w
 
 This pattern models situations where event attributes are not independent values but are derived from time itself, such as time-of-day, business hours, or operational periods.
 
-Unlike true temporal dependencies, temporal bucketing does not rely on historical context or previous events. Each record is evaluated independently based solely on its timestamp.
+Unlike true temporal dependencies, time dependency does not rely on historical context or previous events. Each record is evaluated independently based solely on its timestamp.
 
 ## Properties
 
@@ -21,7 +21,7 @@ Unlike true temporal dependencies, temporal bucketing does not rely on historica
 ## Validation query
 
 ```sql
-CREATE TABLE temporal_bucketing
+CREATE TABLE time_dependency
 (
     timestamp DateTime,
     dependent_value String
@@ -38,7 +38,7 @@ SELECT
     max(hour) AS max_hour,
     count() AS events,
     covered_hours,
-FROM temporal_bucketing
+FROM time_dependency
 GROUP BY bucket
 ORDER BY min_hour;
 ```

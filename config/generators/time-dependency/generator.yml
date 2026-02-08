@@ -13,5 +13,5 @@ output:
 - clickhouse:
     host: clickhouse
     port: 8123
-    table: temporal_bucketing
+    table: time_dependency
     password: default
