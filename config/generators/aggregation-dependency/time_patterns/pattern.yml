@@ -1,0 +1,17 @@
+label: Main pattern
+oscillator:
+  period: 1
+  unit: days
+  start: 00:00
+  end: +5d
+multiplier:
+  ratio: 200000
+randomizer:
+  deviation: 0.1
+  direction: mixed
+  sampling: 1024
+spreader:
+  distribution: beta
+  parameters:
+    a: 15
+    b: 15

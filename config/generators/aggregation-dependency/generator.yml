@@ -1,0 +1,17 @@
+input:
+- time_patterns:
+    patterns:
+    - time_patterns/pattern.yml
+event:
+  template:
+    mode: all
+    templates:
+    - template:
+        template: templates/template.jinja
+output:
+- clickhouse:
+    host: clickhouse
+    port: 8123
+    table: aggregation_dependency
+    password: default
+

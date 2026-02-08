@@ -1,0 +1,28 @@
+{% set queue = locals.get('queue') %}
+
+{% if queue is none %}
+  {% set queue = module.collections.deque(maxlen=100) %}
+  {% do locals.set('queue', queue) %}
+{% endif %}
+
+{% do queue.append(timestamp) %}
+
+{% set time_gap = queue[-1].timestamp() - queue[-0].timestamp() %}
+{% set is_peak = false %}
+{% set eps = 1 %}
+
+{# last 100 events occured within 12 seconds #}
+{% if time_gap <= 12 %}
+  {% set is_peak = true %}
+{% endif %}
+
+
+{% if time_gap != 0 %}
+  {% set eps = (queue | length) / time_gap %}
+{%endif%}
+
+{
+  "timestamp": "{{ timestamp.isoformat() }}",
+  "is_peak": {{ is_peak | lower }},
+  "eps": {{ eps }}
+}
