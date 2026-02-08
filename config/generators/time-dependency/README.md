@@ -30,14 +30,13 @@ ENGINE = MergeTree()
 ORDER BY timestamp;
 
 WITH
-    toHour(timestamp) AS hour,
-    arraySort(groupUniqArray(hour)) AS covered_hours
+    toHour(timestamp) AS hour
 SELECT
     dependent_value AS bucket,
     min(hour) AS min_hour,
     max(hour) AS max_hour,
     count() AS events,
-    covered_hours,
+    arraySort(groupUniqArray(hour)) AS covered_hours
 FROM time_dependency
 GROUP BY bucket
 ORDER BY min_hour;
