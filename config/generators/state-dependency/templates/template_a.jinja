@@ -1,0 +1,13 @@
+{% set progress = shared.get('progress', 0) % 100 %}
+
+{
+  "timestamp": "{{ timestamp.isoformat() }}",
+  "progress": {{ progress }},
+  "stage": "in progress"
+}
+
+{% set progress = progress + 1 %}
+{% do shared.set('progress', progress) %}
+
+{% set is_failure = module.rand.chance(0.002) %}
+{% do locals.set('is_failure', is_failure) %}

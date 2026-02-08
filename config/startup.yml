@@ -45,3 +45,19 @@
   skip_past: false
   params: {}
   autostart: false
+- id: state-dependency
+  timezone: UTC
+  batch:
+    size: 10000
+    delay: null
+  queue:
+    max_timestamp_batches: 10
+    max_event_batches: 10
+  keep_order: false
+  max_concurrency: 100
+  write_timeout: 10
+  path: /app/config/generators/state-dependency/generator.yml
+  live_mode: false
+  skip_past: false
+  params: {}
+  autostart: false

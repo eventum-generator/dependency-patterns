@@ -1,0 +1,39 @@
+input:
+- timer:
+    seconds: 1.0
+    count: 1
+    repeat: 1000000
+event:
+  template:
+    mode: fsm
+    templates:
+    - template_a:
+        template: templates/template_a.jinja
+        transitions:
+        - to: template_b
+          when:
+            eq:
+              shared.progress: 100
+        - to: template_c
+          when:
+            eq:
+              locals.is_failure: true
+        initial: true
+    - template_b:
+        template: templates/template_b.jinja
+        transitions:
+        - to: template_a
+          when:
+            always: null
+    - template_c:
+        template: templates/template_c.jinja
+        transitions:
+        - to: template_a
+          when:
+            always: null
+output:
+- clickhouse:
+    host: clickhouse
+    port: 8123
+    table: state_dependency
+    password: default

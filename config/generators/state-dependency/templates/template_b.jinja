@@ -1,0 +1,7 @@
+{% set progress = shared.get('progress') %}
+
+{
+  "timestamp": "{{ timestamp.isoformat() }}",
+  "progress": {{ progress }},
+  "stage": "done"
+}
